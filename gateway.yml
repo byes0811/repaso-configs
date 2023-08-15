@@ -1,10 +1,9 @@
 server:
-  port: 8080
+  port: ${PORT:${SERVER_PORT:8080}}
 
 spring:
   application:
     name: gateway
-    
   cloud:
     gateway:
       discovery:
@@ -12,8 +11,8 @@ spring:
           enabled: true
       routes:
         - id: playlistRoute
-          uri: lb://playlist-service/
-          predicate:
+          uri: lb://playlist-service
+          predicates:
             - Path=/playlist/**
 
 eureka:
